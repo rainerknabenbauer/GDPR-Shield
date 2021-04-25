@@ -6,21 +6,21 @@ import org.junit.jupiter.api.Test
 
 class UsersTest {
 
-    private val first_request = """
+    private val first_request_first_user = """
         > From: Laurem Ipsum <laurem.ipsum@agency.com>
         > Subject: Senior Java Freelancer - 100% Remote
         > Date: 23. April 2021 at 12:07:46 CEST
         > To: some.developer@gmail.com
     """
 
-    private val second_request = """
+    private val second_request_second_user = """
         > From: Weil Neil <weil.neil@agency.de>
         > Subject: Junior Java Freelancer - 100% on-site
         > Date: 23. April 2021 at 12:07:46 CEST
         > To: another.developer@yahoo.com
     """
 
-    private val third_request = """
+    private val second_request_first_user = """
         > From: Laurem Ipsum <laurem.ipsum@agency.com>
         > Subject: Junior Java Freelancer - 100% on-site
         > Date: 23. April 2021 at 12:07:46 CEST
@@ -31,8 +31,8 @@ class UsersTest {
     fun `successfully create Users from MailAdapters`() {
         // arrange
         val emailAdapters = ArrayList<EmailAdapter>()
-        emailAdapters.add(EmailAdapter(first_request))
-        emailAdapters.add(EmailAdapter(second_request))
+        emailAdapters.add(EmailAdapter(first_request_first_user))
+        emailAdapters.add(EmailAdapter(second_request_second_user))
 
         // act
         val users = Users.fromEmailAdapters(emailAdapters)
@@ -49,9 +49,9 @@ class UsersTest {
     fun `successfully create multiple emails for same Users from MailAdapters`() {
         // arrange
         val emailAdapters = ArrayList<EmailAdapter>()
-        emailAdapters.add(EmailAdapter(first_request))
-        emailAdapters.add(EmailAdapter(second_request))
-        emailAdapters.add(EmailAdapter(third_request))
+        emailAdapters.add(EmailAdapter(first_request_first_user))
+        emailAdapters.add(EmailAdapter(second_request_second_user))
+        emailAdapters.add(EmailAdapter(second_request_first_user))
 
         // act
         val users = Users.fromEmailAdapters(emailAdapters)
