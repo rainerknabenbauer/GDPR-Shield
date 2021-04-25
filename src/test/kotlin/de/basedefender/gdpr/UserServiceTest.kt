@@ -2,6 +2,7 @@ package de.basedefender.gdpr
 
 import com.ninjasquad.springmockk.MockkBean
 import de.basedefender.gdpr.email.EmailAdapter
+import de.basedefender.gdpr.email.value.Users
 import de.basedefender.gdpr.user.UserRepository
 import de.basedefender.gdpr.user.UserService
 import org.junit.jupiter.api.Test
@@ -33,7 +34,7 @@ internal class UserServiceTest(
 
 
         // act
-        userService.upsertAll(emailAdapters)
+        userService.addEmails(Users.fromEmailAdapters(emailAdapters))
 
         // assert
 

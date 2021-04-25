@@ -14,7 +14,7 @@ class InboxScheduler(
     @Scheduled(fixedDelay = 10000)
     fun fetchEmails() {
         val eMails = mailClient.fetchMails()
-        userService.upsertAll(eMails)
+        userService.addEmails(eMails)
     }
 
 }
