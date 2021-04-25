@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.mail.Folder
+import javax.mail.Message
 import javax.mail.Session
 
 
@@ -15,7 +16,7 @@ class MailClient(
 
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
-    fun readMail() {
+    fun fetchMails(): ArrayList<EmailAdapter> {
         val properties = Properties()
 
         properties["mail.pop3.host"] = mailConfig.host
@@ -30,13 +31,22 @@ class MailClient(
         emailFolder.open(Folder.READ_ONLY)
 
         val messages = emailFolder.messages
-        messages.forEach {message -> Email(message).getAgencyContact(); }
 
         emailFolder.close(false)
         store.close()
 
+        return translate(messages)
     }
 
+    private fun translate(messages: Array<Message>): ArrayList<EmailAdapter> {
+
+        val emails = ArrayList<EmailAdapter>()
+
+        for (message in messages)
+            emails.add(EmailAdapter(message))
+
+        return emails
+    }
 
 
 }
