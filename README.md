@@ -20,7 +20,7 @@ So - if you're fed up with all of this none-sense, and you're looking for a way 
 
 * Forward recruiting spam to gdpr@basedefender.de (or dsgvo@basedefender.de)
 * The service automatically sends a 'cease and delete all my personal data according to GDPR' eMail
-* It tracks the deletion notifications for you
+* It tracks the status for you
 
 If any agency has not implemented GDPR rules properly, and you continue to receive letters from them - now you will notice.
 Once you notice, you can enforce your rights. The service helps you to significantly reduce the noise those agencies create.
@@ -28,8 +28,8 @@ It helps to keep your eMails spam free and your phone silent.
 
 
 ### How to use it
-Just forward the eMail to gdpr@basedefender.de. Please ensure, that the eMail body contains information in the 
-given format:
+Just forward the eMail to gdpr@basedefender.de (or dsgvo@basedefender.de). 
+Please ensure, that the eMail body contains information in the given format:
 
 ```
 From: Laurem Ipsum <laurem.ipsum@agency.com>
@@ -49,11 +49,10 @@ bother you in the future.
 You can delete everything that's associated with your eMail address yourself! Amazing, right.  
 See the next chapter and request a termination link. 
 
-
 ### Delete me!
 
-Just go here _ and request a termination link.  
-You're going to receive an eMail with a link. The Link contains a token. Once you click it, all your data is scraped
+Just go here (work-in-progress) and request a termination link.  
+You're going to receive an eMail with a link. The link contains a token. Once you click it, all your data is scraped
 off of our systems.
 
 It's secure, because only you can access your eMail.  
