@@ -47,8 +47,9 @@ class MailClient(
                 "quoted-printable"),
             "UTF-8"
         )
+        val fromLine = body.split("\n").first { line -> line.contains("From:") }
 
-        println(body)
+        println("from line: $fromLine")
     }
 
 
