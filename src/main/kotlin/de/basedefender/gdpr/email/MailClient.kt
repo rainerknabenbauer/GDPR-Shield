@@ -1,17 +1,21 @@
 package de.basedefender.gdpr.email
 
+import de.basedefender.gdpr.email.value.Email
+import de.basedefender.gdpr.email.value.OutboundEmail
+import de.basedefender.gdpr.email.value.User
 import org.springframework.stereotype.Component
 import java.util.*
-import javax.mail.Flags
-import javax.mail.Folder
-import javax.mail.Message
-import javax.mail.Session
+import javax.mail.*
+import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
 
 
 @Component
 class MailClient(
     private val mailConfig: MailConfig
 ) {
+
+    /*      INBOUND      */
 
     fun fetchMails(): ArrayList<EmailAdapter> {
         val properties = Properties()
@@ -50,5 +54,38 @@ class MailClient(
         return emails
     }
 
+    /*      OUTBOUND      */
+
+
+    fun createDeadlineEmail(user: User): OutboundEmail {
+        val title = "Erasure requests as per Art. 17 GDPR"
+        val content = this::class.java.getResource("/templates/gdpr-notification.html")
+            .readText(Charsets.UTF_8)
+            .replace("{{EMAIL}}", user.email)
+
+        return OutboundEmail(title, content)
+    }
+
+    fun send(outboundEmail: OutboundEmail, recipient: String) {
+        val props = Properties()
+        props["mail.smtp.auth"] = "true"
+        props["mail.smtp.host"] = mailConfig.host
+        props["mail.smtp.port"] = mailConfig.portSmtp
+
+        val session: Session = Session.getInstance(props, object : Authenticator() {
+            override fun getPasswordAuthentication(): PasswordAuthentication {
+                return PasswordAuthentication(mailConfig.email, mailConfig.password)
+            }
+        })
+        val msg: Message = MimeMessage(session)
+        msg.setFrom(InternetAddress(mailConfig.email, false))
+
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient))
+        msg.subject = outboundEmail.title
+        msg.setContent(outboundEmail.content, "text/html; charset=UTF-8")
+        msg.sentDate = Date()
+
+        Transport.send(msg)
+    }
 
 }

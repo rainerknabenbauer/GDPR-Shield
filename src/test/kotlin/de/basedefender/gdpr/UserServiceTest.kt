@@ -14,8 +14,7 @@ internal class UserServiceTest(
     @Autowired private val userService: UserService
 ) {
 
-    @MockkBean
-    private lateinit var userRepository: UserRepository
+
 
     private val request = """
         > From: Laurem Ipsum <laurem.ipsum@agency.com>
@@ -38,6 +37,17 @@ internal class UserServiceTest(
 
         // assert
 
+    }
+
+    @Test
+    fun `asdfdsf`() {
+        // arrange
+
+        // act
+        userService.getPendingNotifications()
+
+        // assert
+        
     }
 
 }

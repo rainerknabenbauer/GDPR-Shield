@@ -27,4 +27,16 @@ class InboxScheduler(
         userService.addEmails(Users.fromEmailAdapters(eMails))
     }
 
+    /**
+     * Send 'cease and delete' notifications to companies.
+     */
+    @Scheduled(fixedDelay = 90000)
+    fun sendEmails() {
+        log.info("Sending eMails ...")
+        userService.getPendingNotifications()
+
+        // log.info("Fetched ${eMails.size} new emails.")
+        val eMails = mailClient.fetchMails()
+    }
+
 }
