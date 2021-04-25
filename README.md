@@ -14,7 +14,7 @@ I do not want to become a commodity for any agency.
 ### Who is this for ..
 .. it's for freelancers and permanent employees who just switched jobs.
 
-I just spend some weeks applying for all sorts of jobs - most of my application were digested by recruiting agencies.
+I just spend some weeks applying for all sorts of jobs - most of my applications were digested by recruiting agencies.
 Now I get up to several eMails a day with ill-fitting job baits. The only thing worse than eMails are phone calls,
 especially when they start with 'you received an email from us two days ago, and you didn't respond'.
 
@@ -59,8 +59,8 @@ Just go here (work-in-progress) and request a termination link.
 You're going to receive an eMail with a link. The link contains a token. Once you click it, all your data is scraped
 off of our systems.
 
-It's secure, because only you can access your eMail.  
-No need to beg us to delete your data. We're better off without it.
+It's secure, because only you can access your eMail. No need for an extra account. No need to beg us to delete your data.    
+We're better off without it.
 
 
 
