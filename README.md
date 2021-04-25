@@ -39,6 +39,35 @@ To: some.developer@gmail.com
 ```
 
 Sometimes the eMail headers get lost, sometimes there's a whole chain of forwarding happening. 
-We pick the first `From:` line we find and choose this address for our GDPR removal notification.
+That's why we need the information included in the eMail body.
 
-Include your eMail as well, so you can query the state of the removal notification.
+## GDPR at basedefender.de
+We use your eMail address as single reference.  
+We do not log, track or do anything else with the information you supply us than taking care that a recruiter won't
+bother you in the future.
+
+You can delete everything that's associated with your eMail address yourself! Amazing, right.  
+See the next chapter and request a termination link. 
+
+
+### Delete me!
+
+Just go here _ and request a termination link.  
+You're going to receive an eMail with a link. The Link contains a token. Once you click it, all your data is scraped
+off of our systems.
+
+It's secure, because only you can access your eMail.  
+No need to beg us to delete your data, we don't even want it.
+
+
+
+
+
+
+
+
+
+
+
+
+
