@@ -9,8 +9,11 @@ class MailConfig {
     @Value("\${mail.host}")
     lateinit var host: String
 
+    @Value("\${mail.port.smtp}")
+    lateinit var portSmtp: String
+
     @Value("\${mail.port.pop3}")
-    lateinit var port: String
+    lateinit var portPop3: String
 
     @Value("\${mail.user}")
     lateinit var user: String
