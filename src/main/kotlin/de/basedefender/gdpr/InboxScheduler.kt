@@ -19,7 +19,7 @@ class InboxScheduler(
     /**
      * Regularly fetches eMails from the inbox and stores them in the database.
      */
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = 30000)
     fun fetchEmails() {
         log.info("Fetching eMails ...")
         val eMails = mailClient.fetchMails()
@@ -30,13 +30,13 @@ class InboxScheduler(
     /**
      * Send 'cease and delete' notifications to companies.
      */
-    @Scheduled(fixedDelay = 90000)
+    @Scheduled(fixedDelay = 60000)
     fun sendEmails() {
-        log.info("Sending eMails ...")
-        userService.getPendingNotifications()
+        val users = userService.getPendingNotifications()
+        log.info("Found ${users.size} users with pending notifications.")
 
-        // log.info("Fetched ${eMails.size} new emails.")
-        val eMails = mailClient.fetchMails()
+        userService.sendGdprNotifications(users)
+        log.info("Sent 'cease and delete' notifications.")
     }
 
 }

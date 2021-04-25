@@ -1,5 +1,6 @@
 package de.basedefender.gdpr.user
 
+import de.basedefender.gdpr.email.MailClient
 import de.basedefender.gdpr.email.value.User
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.data.mongodb.core.find
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(
     private val userRepository: UserRepository,
-    private val mongoTemplate: MongoTemplate
+    private val mongoTemplate: MongoTemplate,
+    private val mailClient: MailClient
 ) {
 
     fun addEmails(users : List<User>) {
@@ -21,15 +23,25 @@ class UserService(
         }}
     }
 
-    fun getPendingNotifications() {
-        // elem match
+    /**
+     * Find all users with pending notifications.
+     */
+    fun getPendingNotifications(): List<User> {
         val pendingNotification = Criteria.where("notified").`is`(false)
         val criteria = Criteria("incidents").elemMatch(pendingNotification)
         val query = Query(criteria)
-        val users = mongoTemplate.find<User>(query)
+        return mongoTemplate.find(query)
+    }
 
-        users.forEach { user -> println(user.email) }
-
+    fun sendGdprNotifications(users: List<User>) {
+        for (user in users) {
+            user.incidents
+                .filter { incident -> !incident.notified }
+                .forEach { incident -> run {
+                    val email = mailClient.createGdprEmail(user)
+                    mailClient.send(email, incident)
+                } }
+        }
     }
 
 }

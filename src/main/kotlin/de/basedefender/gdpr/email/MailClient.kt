@@ -56,8 +56,7 @@ class MailClient(
 
     /*      OUTBOUND      */
 
-
-    fun createDeadlineEmail(user: User): OutboundEmail {
+    fun createGdprEmail(user: User): OutboundEmail {
         val title = "Erasure requests as per Art. 17 GDPR"
         val content = this::class.java.getResource("/templates/gdpr-notification.html")
             .readText(Charsets.UTF_8)
@@ -66,7 +65,7 @@ class MailClient(
         return OutboundEmail(title, content)
     }
 
-    fun send(outboundEmail: OutboundEmail, recipient: String) {
+    fun send(outboundEmail: OutboundEmail, email: Email) {
         val props = Properties()
         props["mail.smtp.auth"] = "true"
         props["mail.smtp.host"] = mailConfig.host
@@ -80,7 +79,7 @@ class MailClient(
         val msg: Message = MimeMessage(session)
         msg.setFrom(InternetAddress(mailConfig.email, false))
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipient))
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.contact))
         msg.subject = outboundEmail.title
         msg.setContent(outboundEmail.content, "text/html; charset=UTF-8")
         msg.sentDate = Date()
