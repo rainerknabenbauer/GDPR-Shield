@@ -4,22 +4,37 @@ import org.apache.commons.io.IOUtils
 import javax.mail.Message
 import javax.mail.internet.MimeUtility
 
-class Email(
-    private val message: Message
-    ) {
+class Email {
 
-    fun getAgencyContact(): String {
-        val body = IOUtils.toString(
+    private val text: String
+
+    constructor(message: Message) {
+        this.text = IOUtils.toString(
             MimeUtility.decode(message.inputStream,
                 "quoted-printable"),
             "UTF-8"
         )
+    }
+
+    constructor(message: String) {
+        this.text = message
+    }
+
+    fun getAgencyContact(): String {
         // Extract information about the original sender
-        val recruiterEmail = body.split("\n").first { line -> line.contains("From:") }
-        val clientEmail = body.split("\n").first { line -> line.contains("From:") }
+        val recruiter = text.split("\n").first { line -> line.contains("From:") }
 
         // Cut the eMail part out of the From line, example:      "> From: Lorem Ipsum <lorem.ipsum@gmail.de>"
-        return recruiterEmail.substring(recruiterEmail.lastIndexOf("<")+1 until recruiterEmail.lastIndexOf(">"))
+        return recruiter.substring(
+                recruiter.lastIndexOf("<")+1 until recruiter.lastIndexOf(">")).trim()
+    }
+
+    fun getEnquirerContact(): String {
+        // Extract information about the original sender
+        val enquirer = text.split("\n").first { line -> line.contains("To:") }
+
+        // Cut the eMail part out of the From line, example:      "> From: Lorem Ipsum <lorem.ipsum@gmail.de>"
+        return enquirer.substring(enquirer.lastIndexOf(":")+1).trim()
     }
 
 }
