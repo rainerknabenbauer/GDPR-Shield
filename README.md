@@ -11,18 +11,20 @@ Because I personally have strong belief, that the recruiting business as it's do
 I do not want to become a commodity for any agency.
 
 
-### What is it for
-It's both - for freelancers and permanent employees who just switched jobs.
+### Who is this for ..
+.. it's for freelancers and permanent employees who just switched jobs.
 
 I just spend some weeks applying for all sorts of jobs - most of my application were digested by recruiting agencies.
-Now I get up to several emails a day with ill-fitting job baits. The only thing worse than eMails are phone calls,
+Now I get up to several eMails a day with ill-fitting job baits. The only thing worse than eMails are phone calls,
 especially when they start with 'you received an email from us two days ago, and you didn't respond'.
 
 So - if you're fed up with all of this none-sense, and you're looking for a way out - here's how:
 
 * Forward recruiting spam to gdpr@basedefender.de (or dsgvo@basedefender.de)
-* The service automatically sends a 'cease and delete all my personal data according to GDPR' eMail
+* The service automatically sends a 'cease and delete all my personal data according to GDPR' eMail*
 * It tracks the status for you
+
+(* see for template: https://www.datarequests.org/blog/sample-letter-gdpr-erasure-request/)
 
 If any agency has not implemented GDPR rules properly, and you continue to receive letters from them - now you will notice.
 Once you notice, you can enforce your rights. The service helps you to significantly reduce the noise those agencies create.
@@ -41,12 +43,12 @@ To: some.developer@gmail.com
 ```
 
 Sometimes the eMail headers get lost, sometimes there's a whole chain of forwarding happening. 
-That's why we need the information included in the eMail body.
+That's why we need the information included on top of the eMail body.
 
 ## GDPR at basedefender.de
 We use your eMail address as single reference.  
-We do not log, track or do anything else with the information you supply us than taking care that a recruiter won't
-bother you in the future.
+We do not log, track or do anything other with the information you supply us than taking 
+care that a recruiter won't bother you in the future.
 
 You can delete everything that's associated with your eMail address yourself! Amazing, right.  
 See the next chapter and request a termination link. 
@@ -58,7 +60,7 @@ You're going to receive an eMail with a link. The link contains a token. Once yo
 off of our systems.
 
 It's secure, because only you can access your eMail.  
-No need to beg us to delete your data, we don't even want it.
+No need to beg us to delete your data. We're better off without it.
 
 
 
