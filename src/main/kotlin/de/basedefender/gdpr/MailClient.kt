@@ -1,14 +1,11 @@
 package de.basedefender.gdpr
 
-import org.apache.commons.io.IOUtils
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.mail.Folder
-import javax.mail.Message
 import javax.mail.Session
-import javax.mail.internet.MimeUtility
 
 
 @Component
@@ -33,23 +30,11 @@ class MailClient(
         emailFolder.open(Folder.READ_ONLY)
 
         val messages = emailFolder.messages
-        messages.forEach {message -> printMessageDetails(message) }
+        messages.forEach {message -> Email(message).getAgencyContact(); }
 
         emailFolder.close(false)
         store.close()
 
-    }
-
-    private fun printMessageDetails(message: Message) {
-
-        val body = IOUtils.toString(
-            MimeUtility.decode(message.inputStream,
-                "quoted-printable"),
-            "UTF-8"
-        )
-        val fromLine = body.split("\n").first { line -> line.contains("From:") }
-
-        println("from line: $fromLine")
     }
 
 
