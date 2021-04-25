@@ -1,9 +1,8 @@
 package de.basedefender.gdpr.email
 
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.util.*
+import javax.mail.Flags
 import javax.mail.Folder
 import javax.mail.Message
 import javax.mail.Session
@@ -26,14 +25,19 @@ class MailClient(
         store.connect(mailConfig.host, mailConfig.user, mailConfig.password)
 
         val emailFolder = store.getFolder("INBOX")
-        emailFolder.open(Folder.READ_ONLY)
+        emailFolder.open(Folder.READ_WRITE)
 
         val messages = translate(emailFolder.messages)
+        deleteMessages(emailFolder.messages)
 
-        emailFolder.close(false)
+        emailFolder.close(true)
         store.close()
 
         return messages
+    }
+
+    private fun deleteMessages(messages: Array<Message>) {
+        messages.forEach { message -> message.setFlag(Flags.Flag.DELETED, true); }
     }
 
     private fun translate(messages: Array<Message>): ArrayList<EmailAdapter> {

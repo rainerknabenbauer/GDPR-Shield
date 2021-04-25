@@ -7,7 +7,9 @@ import java.util.regex.Pattern
 import javax.mail.Message
 import javax.mail.internet.MimeUtility
 
-
+/**
+ * Extracts from IMAP and transforms into internal eMail representation.
+ */
 class EmailAdapter {
 
     private val text: String
@@ -34,7 +36,7 @@ class EmailAdapter {
 
         return try {
             // Extract contact information for the original sender
-            val recruiter = text.split("\n").first { line -> line.contains("From:") }
+            val recruiter = text.split("\n").first { line -> line.toLowerCase().contains("from:") }
 
             // Cut the eMail part out of the From line, example:      "> From: Lorem Ipsum <lorem.ipsum@gmail.de>"
             Optional.of(extractEmail(recruiter))
@@ -46,7 +48,7 @@ class EmailAdapter {
     fun getUserContact(): Optional<String> {
         return try {
             // Extract contact information for the person being bothered
-            val user = text.split("\n").first { line -> line.contains("To:") }
+            val user = text.split("\n").first { line -> line.toLowerCase().contains("to:") }
 
             // Cut the eMail part out of the From line, example:      "> To: lorem.ipsum@gmail.de"
             return Optional.of(extractEmail(user))
@@ -58,7 +60,7 @@ class EmailAdapter {
     private fun extractEmail(line: String): String {
         val matcher = eMailPattern.matcher(line)
         matcher.find()
-        return matcher.group()
+        return matcher.group().toLowerCase()
     }
 
 }

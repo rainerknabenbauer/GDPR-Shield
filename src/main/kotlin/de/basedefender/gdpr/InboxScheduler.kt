@@ -16,6 +16,9 @@ class InboxScheduler(
 
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
+    /**
+     * Regularly fetches eMails from the inbox and stores them in the database.
+     */
     @Scheduled(fixedDelay = 60000)
     fun fetchEmails() {
         log.info("Fetching eMails ...")
