@@ -9,7 +9,10 @@ class UserService(
 ) {
 
     fun addEmails(users : List<User>) {
-        users.forEach { user -> userRepository.save(user)}
+        users.forEach { user -> run {
+            println("Saving user ${user.email}")
+            userRepository.save(user)
+        }}
     }
 
 }
