@@ -16,7 +16,7 @@ class InboxScheduler(
 
     private val log: Logger = LoggerFactory.getLogger(this::class.java)
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 60000)
     fun fetchEmails() {
         log.info("Fetching eMails ...")
         val eMails = mailClient.fetchMails()
