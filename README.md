@@ -59,7 +59,10 @@ Just go here (work-in-progress) and request a termination link.
 You're going to receive an eMail with a link. The link contains a token. Once you click it, all your data is scraped
 off of our systems.
 
-It's secure, because only you can access your eMail. No need for an extra account. No need to beg us to delete your data.    
+It's secure, because only you can access your eMail.   
+No need for an extra account.    
+No need to beg us to delete your data. 
+
 We're better off without it.
 
 
