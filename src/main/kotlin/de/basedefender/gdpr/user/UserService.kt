@@ -2,6 +2,7 @@ package de.basedefender.gdpr.user
 
 import de.basedefender.gdpr.email.EmailAdapter
 import de.basedefender.gdpr.email.value.Email
+import de.basedefender.gdpr.email.value.User
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.ArrayList
@@ -24,7 +25,7 @@ class UserService(
     }
 
     fun upsertAll(mailsByUser: Map<String, List<Email>>) {
-
+        mailsByUser.forEach { user -> userRepository.save(User(user.key, user.value))}
     }
 
 }
