@@ -8,20 +8,17 @@ class Email(
     private val message: Message
     ) {
 
-    fun getAgencyContact() {
+    fun getAgencyContact(): String {
         val body = IOUtils.toString(
             MimeUtility.decode(message.inputStream,
                 "quoted-printable"),
             "UTF-8"
         )
+        // Extract information about the original sender
         val fromLine = body.split("\n").first { line -> line.contains("From:") }
 
-        println("from line: $fromLine")
-
         // Cut the eMail part out of the From line, example:      "> From: Lorem Ipsum <lorem.ipsum@gmail.de>"
-        val email = fromLine.substring(fromLine.lastIndexOf("<")+1 until fromLine.lastIndexOf(">"))
-
-        println("extracted email: $email")
+        return fromLine.substring(fromLine.lastIndexOf("<")+1 until fromLine.lastIndexOf(">"))
     }
 
 }
