@@ -12,6 +12,8 @@ I do not want to become a commodity for any agency.
 
 
 ### What is it for
+It's both - for freelancers and permanent employees who just switched jobs.
+
 I just spend some weeks applying for all sorts of jobs - most of my application were digested by recruiting agencies.
 Now I get up to several emails a day with ill-fitting job baits. The only thing worse than eMails are phone calls,
 especially when they start with 'you received an email from us two days ago, and you didn't respond'.
