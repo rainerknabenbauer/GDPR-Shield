@@ -14,8 +14,6 @@ class MailClient(
     private val mailConfig: MailConfig
 ) {
 
-    private val log: Logger = LoggerFactory.getLogger(this::class.java)
-
     fun fetchMails(): ArrayList<EmailAdapter> {
         val properties = Properties()
 
@@ -30,12 +28,12 @@ class MailClient(
         val emailFolder = store.getFolder("INBOX")
         emailFolder.open(Folder.READ_ONLY)
 
-        val messages = emailFolder.messages
+        val messages = translate(emailFolder.messages)
 
         emailFolder.close(false)
         store.close()
 
-        return translate(messages)
+        return messages
     }
 
     private fun translate(messages: Array<Message>): ArrayList<EmailAdapter> {

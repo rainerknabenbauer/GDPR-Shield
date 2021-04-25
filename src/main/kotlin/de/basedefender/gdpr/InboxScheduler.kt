@@ -3,6 +3,8 @@ package de.basedefender.gdpr
 import de.basedefender.gdpr.email.MailClient
 import de.basedefender.gdpr.email.value.Users
 import de.basedefender.gdpr.user.UserService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
 
@@ -12,9 +14,13 @@ class InboxScheduler(
     private val userService: UserService
 ) {
 
+    private val log: Logger = LoggerFactory.getLogger(this::class.java)
+
     @Scheduled(fixedDelay = 10000)
     fun fetchEmails() {
+        log.info("Fetching eMails ...")
         val eMails = mailClient.fetchMails()
+        log.info("Fetched ${eMails.size} new emails.")
         userService.addEmails(Users.fromEmailAdapters(eMails))
     }
 
