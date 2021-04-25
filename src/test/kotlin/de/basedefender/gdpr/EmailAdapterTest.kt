@@ -1,5 +1,6 @@
 package de.basedefender.gdpr
 
+import de.basedefender.gdpr.email.EmailAdapter
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -58,6 +59,19 @@ internal class EmailAdapterTest {
 
         // assert
         Assertions.assertTrue(actual.isEmpty)
+    }
+
+    @Test
+    fun`successful convert to email`() {
+        // arrange
+        val email = EmailAdapter(request)
+
+        // act
+        val actual = email.toEmail()
+
+        // assert
+        Assertions.assertTrue(actual.isPresent)
+        Assertions.assertEquals("laurem.ipsum@agency.com", actual.get().contact)
     }
 
 }

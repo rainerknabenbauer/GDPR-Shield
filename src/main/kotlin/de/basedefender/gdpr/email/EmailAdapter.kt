@@ -1,5 +1,6 @@
-package de.basedefender.gdpr
+package de.basedefender.gdpr.email
 
+import de.basedefender.gdpr.email.value.Email
 import org.apache.commons.io.IOUtils
 import java.util.*
 import javax.mail.Message
@@ -20,6 +21,10 @@ class EmailAdapter {
 
     constructor(message: String) {
         this.text = message
+    }
+
+    fun toEmail(): Optional<Email> {
+        return getAgencyContact().map { contact -> Email(contact = contact) }
     }
 
     fun getAgencyContact(): Optional<String> {

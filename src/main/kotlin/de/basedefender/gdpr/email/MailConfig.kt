@@ -1,4 +1,4 @@
-package de.basedefender.gdpr
+package de.basedefender.gdpr.email
 
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Configuration

@@ -1,4 +1,4 @@
-package de.basedefender.gdpr
+package de.basedefender.gdpr.email
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
