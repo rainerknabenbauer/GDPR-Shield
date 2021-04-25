@@ -6,18 +6,19 @@ import org.springframework.context.annotation.Configuration
 @Configuration
 class MailConfig {
 
-    @Value("\${spring.mail.host}")
+    @Value("\${mail.host}")
     lateinit var host: String
 
-    @Value("\${spring.mail.user}")
+    @Value("\${mail.port.pop3}")
+    lateinit var port: String
+
+    @Value("\${mail.user}")
     lateinit var user: String
 
-    @Value("\${spring.mail.username}")
+    @Value("\${mail.email}")
     lateinit var email: String
 
-    @Value("\${spring.mail.password}")
+    @Value("\${mail.password}")
     lateinit var password: String
 
-    @Value("\${spring.mail.properties.mail.smtp.starttls.enabled}")
-    var starttls: Boolean = false
 }

@@ -1,45 +1,40 @@
 package de.basedefender.gdpr
 
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import java.util.*
 import javax.mail.*
+import javax.mail.Folder
+import kotlin.jvm.Throws
+
 
 @Component
 class MailClient(
     private val mailConfig: MailConfig
 ) {
 
+    private val log: Logger = LoggerFactory.getLogger(this::class.java)
+
     fun readMail() {
+        val properties = Properties()
 
-        val props = Properties()
-        props["mail.smtp.starttls.enable"] = mailConfig.starttls
-        props["mail.smtp.host"] = mailConfig.host
-        props["mail.smtp.port"] = mailConfig.port
-        props["mail.smtp.auth"] = "true"
+        properties["mail.pop3.host"] = mailConfig.host
+        properties["mail.pop3.port"] = mailConfig.port
+        properties["mail.pop3.starttls.enable"] = "true"
+        val emailSession = Session.getDefaultInstance(properties)
 
+        val store = emailSession.getStore("pop3s")
+        store.connect(mailConfig.host, mailConfig.user, mailConfig.password)
 
-        val session =  Session.getInstance(props,
-            object : javax.mail.Authenticator() {
-                override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication(mailConfig.user, mailConfig.password)
-                }
-            })
+        val emailFolder = store.getFolder("INBOX")
+        emailFolder.open(Folder.READ_ONLY)
 
-        val store: Store = session.store
-        store.connect(mailConfig.host, null, null)
+        val messages = emailFolder.messages
+        messages.forEach {message -> println(message.subject) }
 
-        val inbox: Folder = store.getFolder("INBOX")
-        inbox.open(Folder.READ_WRITE)
-
-        val messages: Array<Message> = inbox.messages
-
-        for (i in messages.indices) {
-            println("Message " + (i + 1))
-            messages[i].writeTo(System.out)
-        }
-        inbox.close(false)
+        emailFolder.close(false)
         store.close()
-
     }
 
 }

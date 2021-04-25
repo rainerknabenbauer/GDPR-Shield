@@ -1,8 +1,9 @@
-
 mail:
   host: HOST
-  username: USERNAME
-  email: MAIL
+  port:
+    pop3: 995
+  user: USER
+  email: EMAIL
   password: PASSWORD
   properties:
     mail:
@@ -10,3 +11,22 @@ mail:
         auth: true
         starttls:
           enabled: true
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write_dates_as_timestamps: false
+  data:
+    mongodb:
+      uri: mongodb+srv://USERNAME:PASSWORD@mongodb.wecon.mongodb.net/DATABASE?retryWrites=true&w=majority
+      # get your free mongodb cloud here -> https://www.mongodb.com/cloud
+
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: password
+    key-store-type: pkcs12
+    key-alias: tomcat
+    key-password: password
+  port: 8443
