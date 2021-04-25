@@ -19,7 +19,7 @@ especially when they start with 'you received an email from us two days ago, and
 So - if you're fed up with all of this none-sense, and you're looking for a way out - here's how:
 
 * Forward recruiting spam to gdpr@basedefender.de (or dsgvo@basedefender.de)
-* The service automatically sends a 'cease and delete all our personal data according to GDPR' eMail
+* The service automatically sends a 'cease and delete all my personal data according to GDPR' eMail
 * It tracks the deletion notifications for you
 
 If any agency has not implemented GDPR rules properly, and you continue to receive letters from them - now you will notice.
