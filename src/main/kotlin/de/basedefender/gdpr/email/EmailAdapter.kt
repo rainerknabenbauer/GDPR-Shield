@@ -63,7 +63,7 @@ class EmailAdapter {
         var email = ""
 
         // find first eMail
-        if (matcher.find()) matcher.group().toLowerCase()
+        if (matcher.find()) email = matcher.group().toLowerCase()
 
         // check if there is more than one eMail address - if so, invalidate
         if (matcher.find()) email = ""

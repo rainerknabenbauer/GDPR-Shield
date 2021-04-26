@@ -27,6 +27,20 @@ class UsersTest {
         > To: another.developer@yahoo.com
     """
 
+    private val multiple_senders = """
+        > From: Laurem Ipsum <laurem.ipsum@agency.com>, <laurem.ipsum@agency.com>
+        > Subject: Junior Java Freelancer - 100% on-site
+        > Date: 23. April 2021 at 12:07:46 CEST
+        > To: another.developer@yahoo.com
+    """
+
+    private val multiple_receivers = """
+        > From: Laurem Ipsum <laurem.ipsum@agency.com>
+        > Subject: Junior Java Freelancer - 100% on-site
+        > Date: 23. April 2021 at 12:07:46 CEST
+        > To: <another.developer@yahoo.com>, <laurem.ipsum@agency.com>
+    """
+
     @Test
     fun `successfully create Users from MailAdapters`() {
         // arrange
@@ -64,6 +78,32 @@ class UsersTest {
         Assertions.assertEquals("another.developer@yahoo.com", users[1].email)
         Assertions.assertEquals("weil.neil@agency.de", users[1].incidents[0].contact)
         Assertions.assertEquals("laurem.ipsum@agency.com", users[1].incidents[1].contact)
+    }
+
+    @Test
+    fun `fails to create email multiple senders`() {
+        // arrange
+        val emailAdapters = ArrayList<EmailAdapter>()
+        emailAdapters.add(EmailAdapter(multiple_senders))
+
+        // act
+        val users = Users.fromEmailAdapters(emailAdapters)
+
+        // assert
+        Assertions.assertEquals(0, users.size)
+    }
+
+    @Test
+    fun `fails to create email multiple receivers`() {
+        // arrange
+        val emailAdapters = ArrayList<EmailAdapter>()
+        emailAdapters.add(EmailAdapter(multiple_receivers))
+
+        // act
+        val users = Users.fromEmailAdapters(emailAdapters)
+
+        // assert
+        Assertions.assertEquals(0, users.size)
     }
 
 }

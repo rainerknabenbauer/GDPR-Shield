@@ -18,14 +18,14 @@ class MailClient(
     /*      INBOUND      */
 
     fun fetchMails(): ArrayList<EmailAdapter> {
-        val properties = Properties()
+        val props = Properties()
+        props["mail.smtp.auth"] = "true"
+        props["mail.smtp.host"] = mailConfig.host
+        props["mail.smtp.port"] = mailConfig.portSmtp
 
-        properties["mail.pop3.host"] = mailConfig.host
-        properties["mail.pop3.port"] = mailConfig.portPop3
-        properties["mail.pop3.starttls.enable"] = "true"
-        val emailSession = Session.getDefaultInstance(properties)
+        val emailSession = Session.getDefaultInstance(props)
 
-        val store = emailSession.getStore("pop3s")
+        val store = emailSession.getStore("imaps")
         store.connect(mailConfig.host, mailConfig.user, mailConfig.password)
 
         val emailFolder = store.getFolder("INBOX")
