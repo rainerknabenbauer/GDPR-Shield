@@ -56,11 +56,12 @@ class MailClient(
 
     /*      OUTBOUND      */
 
-    fun createGdprEmail(user: User): OutboundEmail {
+    fun createGdprEmail(user: User, incident: Email): OutboundEmail {
         val title = "Erasure requests as per Art. 17 GDPR"
         val content = this::class.java.getResource("/templates/gdpr-notification.html")
             .readText(Charsets.UTF_8)
             .replace("{{EMAIL}}", user.email)
+            .replace("{{TRANSACTION_ID}}", incident.id.toString())
 
         return OutboundEmail(title, content)
     }

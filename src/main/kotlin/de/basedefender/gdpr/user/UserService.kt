@@ -38,7 +38,7 @@ class UserService(
             user.incidents
                 .filter { incident -> !incident.notified }
                 .forEach { incident -> run {
-                    val email = mailClient.createGdprEmail(user)
+                    val email = mailClient.createGdprEmail(user, incident)
                     mailClient.send(email, incident)
                 } }
         }
