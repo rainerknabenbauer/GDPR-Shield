@@ -67,17 +67,17 @@ We're better off without it.
 
 # Self hosting
 
-Build the container and run it    
+Build the container    
 
     docker rm build -t gdpr-shield .
-    docker run -it --rm -p 44301:44301 --name gdpr-shield gdpr-shield
-
 
 or pull the current version from Docker Hub
 
     docker pull nykon/gdpr-shield
 
+and run it
 
+    docker run -it --rm -p 44301:44301 --name gdpr-shield gdpr-shield
 
 
 
