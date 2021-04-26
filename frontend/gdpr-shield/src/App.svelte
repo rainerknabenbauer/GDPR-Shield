@@ -43,8 +43,11 @@
 
 <main>
 	<h1>{message}</h1>
-	<p>Thank you for your cooperation</p>
 </main>
+
+<div class="footer">
+	GDPR Shield © 2021
+</div>
 
 <style>
 	main {
@@ -59,6 +62,15 @@
 		text-transform: uppercase;
 		font-size: 4em;
 		font-weight: 100;
+	}
+
+	.footer {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		text-align: center;
+		color: #a1a1a1;
 	}
 
 	@media (min-width: 640px) {
