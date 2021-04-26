@@ -36,10 +36,12 @@ class UserService(
     fun sendGdprNotifications(users: List<User>) {
         for (user in users) {
             user.incidents
-                .filter { incident -> !incident.notified }
+                .filter { incident -> !incident.isNotified() }
                 .forEach { incident -> run {
                     val email = mailClient.createGdprEmail(user, incident)
                     mailClient.send(email, incident)
+                    incident.setNotified()
+                    userRepository.save(user)
                 } }
         }
     }

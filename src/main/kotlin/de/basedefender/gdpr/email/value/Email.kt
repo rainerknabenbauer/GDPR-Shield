@@ -6,13 +6,26 @@ import java.util.*
 data class Email(
     val id: String = UUID.randomUUID().toString(),
     val contact: String,
-    val notified: Boolean = false,
-    var acknowledged: Boolean = false,
+    private var notified: Boolean = false,
+    private var acknowledged: Boolean = false,
     val date: LocalDateTime = LocalDateTime.now()
 ) {
 
-    fun setAcknowdleged() {
-        this.acknowledged = true;
+    fun isNotified(): Boolean {
+        return this.notified
     }
+
+    fun setNotified() {
+        this.notified = true
+    }
+
+    fun isAcknowledged(): Boolean {
+        return this.acknowledged
+    }
+
+    fun setAcknowleged() {
+        this.acknowledged = true
+    }
+
 
 }

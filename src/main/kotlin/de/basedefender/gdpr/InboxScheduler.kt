@@ -42,8 +42,10 @@ class InboxScheduler(
             val users = userService.getPendingNotifications()
             log.info("Found ${users.size} users with pending notifications.")
 
-            userService.sendGdprNotifications(users)
-            log.info("Sent 'cease and delete' notifications.")
+            if (users.isNotEmpty()) {
+                userService.sendGdprNotifications(users)
+                log.info("Sent 'cease and delete' notifications.")
+            }
         }
     }
 

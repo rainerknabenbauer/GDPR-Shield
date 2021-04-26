@@ -31,10 +31,10 @@ class ConfirmationService(
 
             if (Objects.nonNull(incident)) {
 
-                if (incident!!.acknowledged) {
-                    return "Already confirmed."
-                } else if (!incident.acknowledged) {
-                    incident.setAcknowdleged()
+                if (incident!!.isAcknowledged()) {
+                    return "Already confirmed"
+                } else if (!incident.isAcknowledged()) {
+                    incident.setAcknowleged()
                     userRepository.save(user)
                     return "Confirmed!"
                 }

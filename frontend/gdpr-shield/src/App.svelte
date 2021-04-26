@@ -43,7 +43,7 @@
 
 <main>
 	<h1>{message}</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<p>Thank you for your cooperation</p>
 </main>
 
 <style>
