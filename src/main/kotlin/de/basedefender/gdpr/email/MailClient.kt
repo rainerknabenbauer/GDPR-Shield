@@ -18,14 +18,13 @@ class MailClient(
     /*      INBOUND      */
 
     fun fetchMails(): ArrayList<EmailAdapter> {
-        val props = Properties()
-        props["mail.smtp.auth"] = "true"
-        props["mail.smtp.host"] = mailConfig.host
-        props["mail.smtp.port"] = mailConfig.portSmtp
+        val properties = Properties()
+        properties["mail.pop3.host"] = mailConfig.host
+        properties["mail.pop3.port"] = mailConfig.portPop3
+        properties["mail.pop3.starttls.enable"] = "true"
+        val emailSession = Session.getDefaultInstance(properties)
+        val store = emailSession.getStore("pop3s")
 
-        val emailSession = Session.getDefaultInstance(props)
-
-        val store = emailSession.getStore("imaps")
         store.connect(mailConfig.host, mailConfig.user, mailConfig.password)
 
         val emailFolder = store.getFolder("INBOX")
@@ -61,7 +60,7 @@ class MailClient(
         val content = this::class.java.getResource("/templates/gdpr-notification.html")
             .readText(Charsets.UTF_8)
             .replace("{{EMAIL}}", user.email)
-            .replace("{{TRANSACTION_ID}}", incident.id.toString())
+            .replace("{{TRANSACTION_ID}}", incident.id)
 
         return OutboundEmail(title, content)
     }
