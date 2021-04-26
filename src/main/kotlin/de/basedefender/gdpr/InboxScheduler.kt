@@ -23,7 +23,7 @@ class InboxScheduler(
     /**
      * Regularly fetches eMails from the inbox and stores them in the database.
      */
-    @Scheduled(fixedDelay = 300000)
+    @Scheduled(fixedDelay = 10000)
     fun fetchEmails() {
         if (isActive) {
             log.info("Fetching eMails ...")
@@ -36,7 +36,7 @@ class InboxScheduler(
     /**
      * Send 'cease and delete' notifications to companies.
      */
-    @Scheduled(fixedDelay = 600000)
+    @Scheduled(fixedDelay = 10000)
     fun sendEmails() {
         if (isActive) {
             val users = userService.getPendingNotifications()

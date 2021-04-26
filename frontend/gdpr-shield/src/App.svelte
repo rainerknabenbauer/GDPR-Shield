@@ -6,7 +6,7 @@
 	let response;
 
 	const host = window.location.hostname;
-	const backendUri = production() ? "https://basedefender.de:8443" : "https://" + host + ":8443";
+	const backendUri = production() ? "https://basedefender.de:44301" : "https://" + host + ":44301";
 	const self = production() ? "https://" + host : "http://" + host + ":5000";
 
 	onMount(async () => {

@@ -59,8 +59,16 @@ class EmailAdapter {
 
     private fun extractEmail(line: String): String {
         val matcher = eMailPattern.matcher(line)
-        matcher.find()
-        return matcher.group().toLowerCase()
+
+        var email = ""
+
+        // find first eMail
+        if (matcher.find()) matcher.group().toLowerCase()
+
+        // check if there is more than one eMail address - if so, invalidate
+        if (matcher.find()) email = ""
+
+        return email
     }
 
 }

@@ -9,8 +9,8 @@ class Users {
         fun fromEmailAdapters(eMails: List<EmailAdapter>): List<User> {
             return eMails
                 // get rid of all empty and invalid entries
-                .filter { adapter -> adapter.getAgencyContact().isPresent }
-                .filter { adapter -> adapter.getUserContact().isPresent }
+                .filter { adapter -> adapter.getAgencyContact().isPresent && !adapter.getAgencyContact().isEmpty }
+                .filter { adapter -> adapter.getUserContact().isPresent && !adapter.getUserContact().isEmpty }
                 // reference all emails to one user
                 .groupBy { adapter -> adapter.getUserContact().get() }
                 // unwrap the adapter to plane Mail while keeping the association to the user
